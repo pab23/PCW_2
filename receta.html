@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='es'>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="stylesheet" href="css/fontello.css">
+	<title>El Recetorio de Mike</title>
+	<link rel="shortcut icon" type="image/x-icon" href="44.ico" />
+	<a id="Inicio"></a>
+	<header>
+		<h1 id="Titulo">
+			El Recetorio de Mike
+		</h1>
+	</header>
+	<nav>
+			<input type="checkbox" id="ckbmenu">
+			<ul>
+				<li><label for="ckbmenu">&equiv;</label></li>
+				<li><a href="index.html"><span class="icon-home"><span>Inicio</span></span> </a> </li>
+				<li><a href="buscar.html"><span class="icon-search"><span>Buscar</span></span></a></li>
+				<li><a href="login.html"><span class="icon-login"><span>Login</span></span> </a> </li>
+				<li><a href="registro.html"><span class="icon-address-book"><span>Registro</span></span> </a></li>
+				<li><a href=""><span class="icon-logout"><span>Logout</span></span></a> </li>
+				<li><a href="nueva-receta.html"><span class="icon-pencil-neg"><span>Nueva Receta</span></span></a></li>
+		</ul>
+	</nav>
+	<article id="cuerpo_receta">
+				<header id="titulo_receta"><a href="receta.html"><h2 title="Churros rellenos de caramelo">Churros rellenos de caramelo</h2></a></header>
+				<a href="receta.html"><img id="imagen_receta" src="churros.jpg" alt="No se ha podido cargar la imagen"></a>
+				<b>Nombre de la receta:</b> Churros rellenos de caramelo.<br><br>
+				<b>Fecha de alta:</b> <time datetime="2018-03-16">16 de marzo de 2018</time><br><br>
+				<p id="parrafo">
+				<b>Elaboración:</b> En una olla mediana coloca el agua, la mantequilla y la sal. Lleva a ebullición y revuelve hasta que la mantequilla se haya derretido completamente.Apaga el fuego y agrega la harina. Revuelve hasta que se incorpore toda la harina y se convierta en una bola de masa suave. Agrega los huevos y revuelve hasta que se incorporen.<br><br>
+
+				Pon abundante aceite en una olla mediana y lleva al fuego hasta que caliente, comienza a colocar, con mucho cuidado tiras de masa formando churros. Fríe los churros hasta que estén dorados de ambos lados, retira del aceite con una espumadera y coloca en un plato con papel absorvente para que pierdan el exceso de aceite, espolvorea con un poco de azúcar.<br><br>
+			</p>
+
+				<b>Tiempo de elaboración:</b> 28 minutos.<br><br>
+				<b>Dificultad:</b> Media (6/10).<br><br>
+				<b>Número de comensales:</b> Entre 2 y 6.<br><br>
+				<b>Número de votos positivos:</b> 34<span class="icon-thumbs-up"></span><br><br>
+				<b>Número de votos negativos:</b> 12<span class="icon-thumbs-down"></span><br><br>
+				<b>Número de comentarios:</b> <a href="#comentario"> 1<span class="icon-comment"></span></a><br><br>
+				<b>Autor:</b> <a href="buscar.html"><b>Pepe Garc&iacute;a Cort&eacute;s.</b></a><br><br>	
+				<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta"> <input type="button" value="No me gusta"> 
+			<form name="nuevocomentario" method="post" id="nuevocomentario">
+			<h2 id="titulo_nuevocomentario">Añadir un comentario</h2>
+				<label for="titulo">Título del comentario:</label><input type="text" maxlength="50" id="titulo" required><br>
+				<label for="texto">Introduce tu comentario:</label>
+			<textarea form ="nuevocomentario" name="taname" id="texto" cols="35" rows="4" required></textarea>
+			
+				<input type="submit" value="enviar">
+				<input type="reset" value="limpiar">
+			</form>
+			<h2 id="zona-resultados">Comentarios:</h2><br>
+			1 Comentario.<br>
+			<p id="comentario">
+			<b>#1</b> Pep Guardiola <b>Fecha:</b><time datetime="2017-02-14"> Martes, 14/02/2018, 10:37</time><br><br><b>Gran receta de churros</b><br>
+			Lo mejor para ahorrar es comer en el comedor del Congreso. Los platos son bastante buenos y cuestan menos que en la guardería o en la escuela (por favor, no intenteis llevarme la contraria en esto). Está claro que está pensado para gente que gana poco dinero, es decir, no el suficiente. El que quiera entender que entienda.<br><br>
+			</p>
+				<div id="cambiar_pagina">
+				<button>&lt;&lt;</button>
+				<button>&lt;</button>
+				<a href="#">1</a>
+				<button>></button>
+				<button>>></button>
+			</div>
+			</article>
+	
+<footer>
+	<div id="texto_footer">
+	<a href="acerca.html">Contacto</a>
+	&copy; 2018 <strong>El Recetorio de Mike</strong>
+	<a href="#Inicio">Inicio</a>
+	</div>
+</footer>
+</html>

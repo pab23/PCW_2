@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='es'>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="stylesheet" href="css/fontello.css">
+	<title>El Recetorio de Mike</title>
+	<link rel="shortcut icon" type="image/x-icon" href="44.ico" />
+	<a id="Inicio"></a>
+	<header>
+		<h1 id="Titulo">
+			El Recetorio de Mike
+		</h1>
+	</header>
+	<nav>
+			<input type="checkbox" id="ckbmenu">
+			<ul>
+				<li><label for="ckbmenu">&equiv;</label></li>
+				<li><a href="index.html"><span class="icon-home"><span>Inicio</span></span> </a> </li>
+				<li><a href="buscar.html"><span class="icon-search"><span>Buscar</span></span></a></li>
+				<li><a href="login.html"><span class="icon-login"><span>Login</span></span> </a> </li>
+				<li><a href="registro.html"><span class="icon-address-book"><span>Registro</span></span> </a></li>
+				<li><a href=""><span class="icon-logout"><span>Logout</span></span></a> </li>
+				<li><a href="nueva-receta.html"><span class="icon-pencil-neg"><span>Nueva Receta</span></span></a></li>
+		</ul>
+		
+	</nav>
+	<br>
+	<p id="cuerpo_acerca">
+	Práctica 1 de la asignatura Programación del Cliente Web, perteneciente al 2º curso de la titulación del Grado Ingeniería Multimedia.<br><br>
+
+	46087864. <b>Pablo Amorós Becerra.</b> Grupo Miércoles 17h. pab23@gcloud.ua.es.<br>
+
+	74386003. <b>Héctor Durá Clement.</b> Grupo Miércoles 17h. hectordura74@gmail.com.<br><br>
+
+	No se ha implementado nada en JavaScript, ya que esto se realizará en prácticas posteriores. Se ha implementado la mayoría de funcionalidades de la página, a excepción de el sistema de usuarios, que en esta primera práctica no debía funcionar, por tanto, tampoco funciona el apartado de "LOG IN" ni el de "LOG OUT". Por otro lado, tampoco se ha implementado el sistema de votos y comentarios de las recetas, se han colocado los símbolos de voto y números y algún comentario, pero no se pueden añadir, es simple contenido plano. Tampoco se ha implementado la posibilidad de añadir receta, ya que es un formulario que no envía la información (esto se hará posteriormente), y por tanto las recetas son añadidas por nosotros, que no varían. Como es lógico dado lo explicado anteriormente, el botón de buscar no envía ni realiza la búsqueda, sino que es un simple formulario visual.<br><br>
+
+	Lo que si que ha sido implementado es todo el sistema de páginas y las relaciones entre ellas, por ejemplo desde index.html podemos acceder a todas las demás páginas clicando en el sitio adecuado, que es el que contiene el hipervínculo. Se han implementado distintos formularios requeridos en el enunciado de la práctica, Web Fonts y distintos Icon Fonts. <br><br>
+
+	También se ha implementado de forma que sea un diseño <i>responsive</i> basado en <i>Mobile First</i>, esto es, que se adapte a las distintas resoluciones sin perder contenido ni solaparlo. Además, se ha implementado un menú de hamburguesa para el menú, de modo que cuando se baje de los 480 píxeles de ancho se pase al menú de hamburguesa. Hemos añadido una serie de condiciones en los formularios a modo de no poder añadir más de 'x' palabras, no poder contener espacios la contraseña, etc. Por último, hemos añadido una serie de focus, es decir, al entrar en una página como por ejemplo en la de Registro, el nombre de usuario recibe el foco. <br><br>
+
+	-----------------------APARTADO PROBLEMAS Y SOLUCIONES-------<br><br>
+
+	El problema más importante que henmos tenido ha sido el de el centrado y la colocación en general de cada elemento de los html, tras varias semana buscando información sobre el tema en varias fuentes  conseguimos el centrado que deseabamos utilizando padding y margin en el CSS. Aún así en algunos apartados no hemos conseguido centrar el fondo del texto correctamente.<br><br>
+
+	Por otro lado, tuvimos bastantes problemas a la hora de las restricciones den los formularios de registro y login, que cabamaos solucionando viendo ejemplos de varias webs y basandonos en ellos para forumlar los requisitos que nosotros necesitabamos.<br><br>
+
+	Otro problema fue conseguir ajustar el tamaño de las imágenes, que fue finalmente solucionado con el parametro width de CSS.<br><br>
+
+	Otro de los problemas que nos encontramos a la hora de pasar el corrector de https://validator.w3.org era que nos aparecía un error denominado “Stray start tag” y “Stray end tag”, el cual hemos solucionado retirando el head y el body, ya que de esta forma se solucionada, ya que el propio sistema aunque no pongas estos atributos, asume como si estuvieran en su posición.<br><br>
+	 Por otro lado, hemos corregido todos los errores que nos aparecían en este corrector, únicamente hemos dejado algún warning ya que eso depende del navegador utilizado.
+</p>
+
+<footer>
+	<div id="texto_footer">
+	<a href="acerca.html">Contacto</a>
+	&copy; 2018 <strong>El Recetorio de Mike</strong>
+	<a href="#Inicio">Inicio</a>
+	</div>
+</footer>
+</html>

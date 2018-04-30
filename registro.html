@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='es'>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css">
+	<link rel="stylesheet" href="css/fontello.css">
+	<title>El Recetorio de Mike</title>
+	<link rel="shortcut icon" type="image/x-icon" href="44.ico" />
+	<script src="codigo01.js"></script>
+	<a id="Inicio"></a>
+	<header>
+		<h1 id="Titulo">
+			El Recetorio de Mike
+		</h1>
+	</header>
+	<body onload="logged()">
+	<nav>
+			<input type="checkbox" id="ckbmenu">
+			<ul>
+				<li><label for="ckbmenu">&equiv;</label></li>
+				<li><a href="index.html"><span class="icon-home"><span>Inicio</span></span> </a> </li>
+				<li><a href="buscar.html"><span class="icon-search"><span>Buscar</span></span></a></li>
+				<li id="log"><a href="login.html"><span class="icon-login"><span>Login</span></span> </a> </li>
+				<li id="reg"><a href="registro.html"><span class="icon-address-book"><span>Registro</span></span> </a></li>
+				<li id="out"><a href=""><span class="icon-logout"><span>Logout</span></span></a> </li>
+				<li id="new"><a href="nueva-receta.html"><span class="icon-pencil-neg"><span>Nueva Receta</span></span></a></li>
+		</ul>
+		
+	</nav>
+	<form method="POST" id="cuerpo_registro">
+	<h2 id="titulo_registro">Registro</h2>
+	<div>
+		<label for="username">Nombre de usuario:</label><input type="text" autofocus required id="username" pattern="[A-Za-z]{1}[A-Za-z0-9]{5,19}"><br>
+		<label for="Nombre">Nombre:</label><input type="text" required id="Nombre"><br>
+		<label for="password">Contraseña:</label><input type="password" required id="password" pattern="[A-Za-z0-9_-]{8,20}"><br>
+		<label for="password2">Vuelve a introducir la contraseña:</label><input type="password" required id="password2" pattern="[A-Za-z0-9_-]{8,20}"><br>
+		<label for="email">Correo electrónico:</label><input type="email" id="email" required><br>
+		<label for="fecnam">Fecha de nacimiento:</label><input type="date" id="fecnam" required><br>
+			<input type="submit" value="enviar">
+	<input type="reset" value="limpiar">
+	</div>
+	</form>
+
+<footer>
+	<div id="texto_footer">
+	<a href="acerca.html">Contacto</a>
+	&copy; 2018 <strong>El Recetorio de Mike</strong>
+	<a href="#Inicio">Inicio</a>
+	</div>
+</footer>
+</body>
+
+</html>

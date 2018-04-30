@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+html{
+	background-color: #F4D2F4;
+}
+*{
+	box-sizing: border-box;
+	padding:0;
+	margin: 0;
+}
+
+body>header>h1{
+	font-family: 'Great Vibes', cursive;
+	font-size: 3em;
+	color: #56006E;
+	vertical-align: middle;
+	display:table-cell;
+
+
+}
+body>header>h3{
+	font-size: 1.6em;
+	padding-bottom: 0.5em;
+}
+
+body>header{
+	display:table;
+	/*background-image: url(recetas-fondo.jpg);*/
+	background-color: white;
+	width: 100%;
+	height: 24vmin;
+	left: 0;
+	top: 0;
+}
+body>nav{
+	background-color: #333;
+}
+body>nav>ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 2.2em;
+	overflow: hidden;
+
+	transition: max-height 1s ease-in-out;
+}
+	body>nav>ul>li>a{
+		display:block;
+		padding: .2em;
+		text-decoration: none;
+		font-weight: bold;
+		color: white;
+	}
+	body>nav>ul>li>a:hover{
+		background-color: #6D6D6D;
+	}
+	body>nav>ul>li:first-of-type>label{
+		font-weight: bold;
+		color: white;
+		padding: 0 .2em;
+		font-size: 2em;
+		display: inline-block;
+		cursor: pointer;
+		transition:transform 1s;
+	
+	}						/* Menu hanburguesa*/
+	#ckbmenu{
+	display: none;					
+	}
+	#ckbmenu:checked+ul{
+		max-height: 14em;
+	}
+	#ckbmenu:checked+ul>li:first-of-type>label{
+		transform:rotate(90deg);
+	}
+	body>nav>ul>form{
+		display: inline-block;
+		*display: inline;
+		border: 1px;
+		padding: 3px 5px;
+		
+	}
+	.searchform .searchfield {
+		background: #fff;
+		padding: 6px 6px 6px 8px;
+		border: solid 1px #bcbbbb;
+		outline: none;
+
+
+	}
+	.searchform .searchbutton {
+		color: #fff;
+		background: #5f5f5f;
+		border-radius: 2em;
+
+	}
+/* MAIN */
+body>section{
+	margin: 0.5em;
+	background-color: white;
+}
+body>section>div{
+	width: 80%;
+	margin: 0.5em;
+	clear: both;
+	padding-bottom: 0.2em;
+}
+body>section>div>article{
+	width: 100%;
+	float: left;
+	padding: 40px 40px;
+	box-sizing: border-box;
+	background-color: white;
+}
+body>section>div>article>header>a>h2{
+	font-family: 'Lobster', cursive;
+	font-size: 1.5em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
+}
+body>section>div>article>header{
+	text-align: center;
+	margin-bottom: 10px;
+	
+
+}
+body>section>div>article>header>a{
+	text-decoration: none;
+	color: #000000;
+}
+body>section>div>article>a>img{
+	width: 100%;
+}
+
+body>section>div>article>footer{
+	padding-top: 1em;
+	border-top: 1px dotted #000000; /*añade linea de puntos*/
+}
+body>section>div>article>footer>a{
+	text-decoration: none;
+	color: black;
+}
+body>section>div>p{
+	margin: 0.5em;
+	text-align: center;
+}
+body>footer{
+	display: table;
+	background-color: #333;
+	color: #FFFFFF;
+	width: 100%;
+	height: 8vmin;
+	
+}
+body>footer:link{
+	text-decoration: none;
+}
+#cambiar_pagina{
+	margin: 0.2em;
+	text-align: center;
+}
+#Titulo{
+	text-align: center;
+}
+#texto_footer{
+	padding-top: 2em;
+	text-align: center;
+	
+}
+#texto_footer>a{
+	text-decoration: none;
+	color: #ffeeff;
+}
+#texto_footer>a:hover{
+	background-color: #6D6D6D
+}
+
+
+#cuerpo_registro{
+	margin: 0 auto;
+	text-align: center;
+}
+#cuerpo_resgistro>div{
+	margin: 0 auto;
+	text-align: left;
+	width: 70%;
+}
+
+#cuerpo_registro>div>input{
+	font-size: 1.5em;
+	margin-bottom: 1em;
+}
+#cuerpo_registro>div>label{
+	font-size: 1.5em;
+
+}
+#titulo_registro{
+	font-size: 2.5em;
+	margin: 0.7em;
+	font-family: 'Lobster', cursive; 
+}
+#titulo_busqueda{
+	font-size: 2.5em;
+	margin: 0.7em;
+	font-family: 'Lobster', cursive; 
+}
+#titulo_resultados{
+	font-size: 2.5em;
+	margin: 0.7em;
+	text-align: center;
+	font-family: 'Lobster', cursive; 
+}
+#titulo_receta{
+	font-size: 2.5em;
+	margin: 0.7em;
+	text-align: center;
+	font-family: 'Lobster', cursive; 
+}
+#titulo_receta>a{
+	text-decoration: none;
+}
+#titulo_receta>a:visited{
+	text-decoration: none;
+	color: black;
+}
+#cuerpo_receta{
+	margin: 10px 20%;
+	background-color: white;
+	padding: 0.2em;
+}
+#nuevocomentario{
+	text-align: center;
+	margin-top: 10px;
+}
+#taid{
+	display: block;
+	margin: auto;
+}
+#comentario{
+	margin: 2em;
+	background-color: #B9EDFF;
+	padding: 0.2em;
+}
+#imagen_receta{
+	display: block;
+	margin: auto;
+	width: 75%;
+}
+#formulario_login{
+	text-align: center;
+}
+#formulario_login>label{
+	font-size: 1.5em;
+
+}
+#formulario_login>input{
+	margin: 0.75em;
+	font-size: 1.5em;
+}
+#nueva_receta{
+	text-align: center;
+	margin: 0.75em;
+}
+#nueva_receta>h2{
+	font-size: 2.5em;
+	font-family: 'Lobster', cursive; 
+}
+#nueva_receta>input{
+	margin:0.75em;
+}
+#ingredientes{
+	box-sizing: border-box;
+	margin: 0.5em;
+
+}
+#ingredientes>ul{
+	list-style: none;
+}
+#nueva_receta>img{
+	width:15%;
+}
+#boton_subir{
+	font-size:1.5em;
+}
+#cuerpo_acerca{
+	margin: 0.5em 20%;
+	background-color: white;
+	padding: 0.2em;
+}
+#parrafo{
+	text-align: justify;
+}
+/*MEDIA QUERIES*/
+ 
+
+@media all and (min-width:480px){
+	body>nav{
+		padding: 0.75em;
+		font-size: 1.25em;
+	}
+	body>nav>ul>li{
+		display:inline-block;
+	}
+	body>nav>ul>li:first-of-type{
+		display:none;
+	}
+	body>nav>ul>li>a>span>span{
+		display:none;
+	}
+	body>section>div{
+	width: 60%;
+	margin:auto;
+	clear: both;
+	}
+}
+@media all and (min-width:640px){
+	body>nav>ul>li>a>span>span{
+		display:inline;
+	}
+	body>section>div>article{
+		width: 50%;
+	}
+	body>section>div{
+		width: 70%;
+	}
+}
