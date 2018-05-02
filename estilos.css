@@ -97,20 +97,19 @@ body>nav>ul{
 /* MAIN */
 body>section{
 	margin: 0.5em;
-	background-color: white;
 }
 body>section>div{
 	width: 80%;
 	margin: 0.5em;
 	clear: both;
 	padding-bottom: 0.2em;
+
 }
 body>section>div>article{
 	width: 100%;
 	float: left;
 	padding: 40px 40px;
 	box-sizing: border-box;
-	background-color: white;
 }
 body>section>div>article>header>a>h2{
 	font-family: 'Lobster', cursive;
