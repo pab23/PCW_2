@@ -18,8 +18,9 @@ function hacerLogin(frm){
 			location.href= 'index.html';
 		}else{
 			console.log('Error en el login');
-			alert('El usuario y la contrasena no coinciden');
-			location.reload();
+			contrasena_incorrecta.innerHTML="El usuario y la contrase&ntilde;a no coinciden.<br>";
+			contrasena_incorrecta.style.color="#FF0000";
+			
 		}
 
 	};
@@ -250,7 +251,7 @@ function build_params(data){
 
 function comprobarUsuario(valor){
 	let xhr = new XMLHttpRequest(),
-		url = 'rest/login/'+valor;
+		url = './rest/login/'+valor;
 
 		xhr.open('GET', url, true);
 
@@ -277,14 +278,32 @@ function comprobarUsuario(valor){
 function registro(formulario){
 	let frm = new FormData(formulario),
 		xhr = new XMLHttpRequest(),
-		url = 'rest/usuario/';
+		url = './rest/usuario/',
+		url_log = './rest/login',
+		login_disponible = false,
+		error_log = false,
+		error_contra = false;
 
-		xhr.open('POST', url, true),
+	var login = formulario.parentNode.querySelector('input[id=login]').value,
+		nombre = formulario.parentNode.querySelector('input[id=nombre').value,
+		pass = formulario.parentNode.querySelector('input[id=pwd').value,
+		pass2 = formulario.parentNode.querySelector('input[id=pwd2').value,
+		email = formulario.parentNode.querySelector('input[id=email').value,
+		fnac = formulario.parentnode.querySelector('input[id=fnac').value;
+
+
+		if(pass != pass2){
+			console.log('Las contrasenas no coinciden');
+			error_contra = true;
+		}
+		if(login_disponible && !error_log && !error_contra){
+			xhr.open('POST', url, true);
 		xhr.onload = function(){
 			let obj = JSON.parse(xhr.responseText);
 			
 			if(obj.RESULTADO='OK'){
 				document.getElementById('cuerpo_registro').reset();
+
 				var modal = document.getElementById('modal'),
 					span = document.getElementsByClassName('close')[0];
 					modal.style.display = 'block';
@@ -300,35 +319,10 @@ function registro(formulario){
 						}
 					}
 
-			}else{
-				var contrasena = document.getElementById('contrasena_mal'),
-					usuario = document.getElementById('estado_usuario');
-
-					usuario ="";
-					contrasena.innerHTML="";
-					if(obj.CODIGO==400){
-						if(obj.DESCRIPCION=='Login no valido'){
-							usuario.innerHTML="Usuario incorrecto";
-							usuario.style.color='#FF0000';
-						}else{
-							usuario.innerHTML= "Usuario no disponible";
-							usuario.style.color='#D615F5';
-						}
-					}else{
-						if(obj.CODIGO==401){
-							contrasena.innerHTML="Las contrasenas no coinciden";
-							contrasena.stye.color='#4500DD';
-						}
-					}
 			}
 		}
-		xhr.send(frm);
-
-		return false;
+	}			
+	xhr.send(frm);
+	return false;
 }
 
-function checkContra(event){
-	if(event.which == 32){
-		return false;
-	}
-}

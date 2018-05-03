@@ -28,7 +28,7 @@
 	</nav>
 	<div id="modal" class="modal">
 		<div class="card">
-			<span onclick ="document.getElementById("modal").style.display='none'" class="close" title="Close Modal">&times;</span>
+			<span onclick ="document.getElementById('modal').style.display='none'" class="close" title="Close Modal">&times;</span>
 			<p>Registro correcto</p>
 			<a href="login.html" class="simple">Ir a login</a>
 		</div>
@@ -36,13 +36,13 @@
 	<form method="POST" id="cuerpo_registro" onsubmit="return registro(this)">
 	<h2 id="titulo_registro">Registro</h2>
 	<div>
-		<label for="username">Nombre de usuario:</label><input type="text" onkeyup="comprobarUsuario(this.value)" autofocus required id="username" pattern="[A-Za-z]{1}[A-Za-z0-9]{5,19}">  <span id="estado_usuario"></span><br>
-		<label for="Nombre">Nombre:</label><input type="text" required id="Nombre"><br>
-		<label for="password">Contraseña:</label><input type="password" required id="password" pattern="[A-Za-z0-9_-]{8,20}"><br>
-		<label for="password2">Vuelve a introducir la contraseña:</label><input type="password" required id="password2" pattern="[A-Za-z0-9_-]{8,20}"><span id="contrasena_mal"></span><br>
+		<label for="username">Nombre de usuario:</label><input type="text" onkeyup="comprobarUsuario(this.value)" autofocus required id="login" pattern="[A-Za-z]{1}[A-Za-z0-9]{5,19}">  <span id="estado_usuario"></span><br>
+		<label for="Nombre">Nombre:</label><input type="text" required id="nombre"><br>
+		<label for="password">Contraseña:</label><input type="password" required id="pwd" pattern="[A-Za-z0-9_-]{8,20}"><br>
+		<label for="password2">Vuelve a introducir la contraseña:</label><input type="password" required id="pwd2" pattern="[A-Za-z0-9_-]{8,20}"><span id="contrasena_mal"></span><br>
 		<label for="email">Correo electrónico:</label><input type="email" id="email" required><br>
-		<label for="fecnam">Fecha de nacimiento:</label><input type="date" id="fecnam" required><br>
-			<input type="submit" value="enviar">
+		<label for="fecnam">Fecha de nacimiento:</label><input type="date" id="fnac" required><br>
+			<input type="submit" value="enviar" class="simple">
 	<input type="reset" value="limpiar">
 	</div>
 	</form>
