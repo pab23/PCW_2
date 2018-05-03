@@ -1,6 +1,7 @@
 // VARIABLES GLOBALES
 var total_recetas = 0,
-	pagina_actual= 1;
+	pagina_actual= 1,
+	login_disponible = true;
 
 function hacerLogin(frm){
 	let xhr= new XMLHttpRequest(),
@@ -261,9 +262,11 @@ function comprobarUsuario(valor){
 			if(obj.RESULTADO=='OK'){
 				var ultado = document.getElementById('estado_usuario');
 				if(obj.DISPONIBLE){
+					login_disponible = true;
 					ultado.innerHTML="Usuario disponible";
 					ultado.style.color='#05A922';
 				}else{
+					login_disponible = false;
 					ultado.innerHTML='Usuario no disponible';
 					ultado.style.color='#FF0000';
 				}
@@ -279,50 +282,38 @@ function registro(formulario){
 	let frm = new FormData(formulario),
 		xhr = new XMLHttpRequest(),
 		url = './rest/usuario/',
-		url_log = './rest/login',
-		login_disponible = false,
 		error_log = false,
 		error_contra = false;
 
-	var login = formulario.parentNode.querySelector('input[id=login]').value,
-		nombre = formulario.parentNode.querySelector('input[id=nombre').value,
-		pass = formulario.parentNode.querySelector('input[id=pwd').value,
-		pass2 = formulario.parentNode.querySelector('input[id=pwd2').value,
-		email = formulario.parentNode.querySelector('input[id=email').value,
-		fnac = formulario.parentnode.querySelector('input[id=fnac').value;
+	var pwd = formulario.parentNode.querySelector('input[id=pwd]').value,
+		pwd2 = formulario.parentNode.querySelector('input[id=pwd2]').value;
 
-
-		if(pass != pass2){
+		if(pwd != pwd2){
 			console.log('Las contrasenas no coinciden');
 			error_contra = true;
+			contrasena_mal.innerHTML="Las contrase&ntilde;as no coinciden";
+			contrasena_mal.style.color="#FF0000"
 		}
 		if(login_disponible && !error_log && !error_contra){
 			xhr.open('POST', url, true);
 		xhr.onload = function(){
+			console.log(xhr.responseText);
 			let obj = JSON.parse(xhr.responseText);
 			
-			if(obj.RESULTADO='OK'){
+			if(obj.RESULTADO=='OK'){
+				console.log('Registro correcto');
 				document.getElementById('cuerpo_registro').reset();
+				alert('El registro se ha completado correctamente');
+				window.location.href="login.html";
 
-				var modal = document.getElementById('modal'),
-					span = document.getElementsByClassName('close')[0];
-					modal.style.display = 'block';
-					span.onclick = function(){
-						modal.style.display='none';
-						window.location.href = 'login.html';
-					}
-
-					window.onclick = function(event){
-						if(event.target == modal){
-							modal.style.display='none';
-							window.location.href = 'login.html';
-						}
-					}
-
+			}else{
+				console.log('Error en la peticion AJAX '+obj.CODIGO);
 			}
 		}
+		xhr.send(frm);
 	}			
-	xhr.send(frm);
+	
 	return false;
 }
+
 
