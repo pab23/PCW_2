@@ -12,7 +12,7 @@
 			El Recetorio de Mike
 		</h1>
 	</header>
-	<body onload="logged()">
+	<body onload="logged();compruebaUsuario();">
 	<nav>
 			<input type="checkbox" id="ckbmenu">
 			<ul>
@@ -26,26 +26,36 @@
 		</ul>
 		
 	</nav>
-	<form name="Busqueda" method="post" id="cuerpo_registro">
+	<form name="Busqueda" action="buscar.html" method="GET" id="cuerpo_registro">
 	<h2 id="titulo_busqueda">Búsqueda de recetas</h2>
 	<div>
 
 		<label for="nombrereceta">Nombre de receta:</label><input type="text" autofocus id="nombrereceta"><br>
 		<label for="ingredientes">Ingredientes:</label><input type="text" id="ingredientes"><br>
 		<label for="timeprep">Tiempo de preparación:</label><input type="number" min="5" max="120" id="timeprep" ><br>
-		<label for="password2">Dificultad:</label><input type="password" id="password2"><br>
+		<label for="dif">Dificultad:</label><select id="dif">
+			<option value="0">Baja</option>
+			<option value="1">Media</option>
+			<option value="2">Alta</option>
+		</select><br>
 		<label for="comensales">Número de comensales:</label><input type="number" min="1" id="comensales"><br>
 		<label for="autor">Autor:</label><input type="text" maxlength="45" value=""  id="autor"><br>
-			<input type="submit" value="Buscar" onclick="buscando()">
+			<input type="submit" value="Buscar">
 	<input type="reset" value="limpiar">
 	</div>
 	</form>
 
 	<section>
-		<div>
-		</div>
-
+		<div id= "cuerpo_receta"></div>
 	</section>
+	<div>
+		<button>&lt;&lt;</button>
+		<button>&lt;</button>
+		<span id="pagina_actual"></span>/
+		<span id="ult_pagina"></span>
+		<button id="next_page">></button>
+		<button>>></button>
+	</div>
 
 <footer>
 	<div id="texto_footer">

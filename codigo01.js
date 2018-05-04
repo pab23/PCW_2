@@ -1,7 +1,9 @@
 // VARIABLES GLOBALES
 var total_recetas = 0,
-	pagina_actual= 1,
-	login_disponible = true;
+	numPagActual= 1,
+	login_disponible = true,
+	recetasCreadas = 0;
+	
 
 function hacerLogin(frm){
 	let xhr= new XMLHttpRequest(),
@@ -54,10 +56,7 @@ function cerrarSesion(){
 //	}
 //}
 
-function busqueda_rapida(frm){
-	forma = new FormData(frm);
-	location.href='buscar.html';
-}
+
 function ultimasRecetas(){
 	var num = 6;
 	let xhr = new XMLHttpRequest(), 
@@ -82,6 +81,7 @@ function creaReceta(recetas, num_recetas){
 
 	for(i=0; i<num_recetas; i++){
 		
+		if(recetas.FILAS[i] != undefined){
 
 		var titulo = recetas.FILAS[i].nombre,
 			autor = recetas.FILAS[i].autor,
@@ -108,6 +108,7 @@ function creaReceta(recetas, num_recetas){
 
 			etiqueta.innerHTML += receta;
 			total_recetas++;
+		}
 	}
 	ultimaPagina();
 	paginaActual();
@@ -133,121 +134,35 @@ function nextPagina(){
 
 }
 
-function nuevoIngrediente(){
-	let ingredientes =document.getElementById('ingrediente');
 
-	ingredientes.innerHTML+='<li>'+ingredientes2.value+'</li>';
-	ingredientes2.value='';
-}
 function anadirFoto(){
 
 }
 
-/*function buscando(){
-	var url_string = window.location.href,
-		url = new URL(url_string),
-		usuario = url.searchParams.get('a'),
-		submit = url.searchParams.get('submit'),
-		pagina = url.searchParams.get('pag');
-	let xhr = new XMLHttpRequest();
 
-		if (usuario != undefined){
-			var url_usr = 'rest/receta/?a='+usuario;
-			xhr.open('GET', url_usr,  true);
-			xhr.onload = function(){
-				let objJSON = JSON.parse(xhr.responseText);
-				creaReceta(objJSON, 6);
-			};
-			xhr.onerror = function(){
-				console.log('ERROR');
-			};
+/*function busquedaRapida(){
+	let busca = document.getElementById('buscaReceta'),
+		url = "./rest/receta/?t=",
+		xhr = new XMLHttpRequest();
 
-		}else if( (submit != undefined) || (typeof(pagina) != "undefined" && pagina !== null)){
-    // Si usuari ha rellena formulario O pagina
-    var titulo = url.searchParams.get("busqueda");
-    console.log("titulo: ");
-    console.log(titulo);
-    var ingredientes = url.searchParams.get("ingredientes");
-    console.log("ingredientes: ");
-    console.log(ingredientes);
-    var tmin = url.searchParams.get("tiempomin");
-    console.log("tmin: ");
-    console.log(tmin);
-    var tmax = url.searchParams.get("tiempomax");
-    console.log("tmax: ");
-    console.log(tmax);
-    var dificultad = url.searchParams.get("dificultad");
-    console.log("difi: ");
-    console.log(dificultad);
-    var comensales = url.searchParams.get("comensales");
-    console.log("comensales: ");
-    console.log(comensales);
-    var autor = url.searchParams.get("autor");
-    console.log("autor: ");
-    console.log(autor);
-    if( ( submit=="Buscar" && titulo=="" && ingredientes=="" && tmin=="" && tmax=="" && dificultad=="" && comensales=="" && autor=="")){
-      // Usuario no ha introducido ningun valor en la busqueda
-      ultimasRecetas();
-    	}
-	}else{
-		var busca ='rest/receta/?',
-			parametros = [];
+	url += busca.value;
 
-		if( typeof(titulo)!='undefined' && titulo!=null && titulo!=''){
-			parametros.t = titulo.replace(/\s+/g,',');
+	console.log(url);
+
+	xhr.open('GET', url, true);
+
+	xhr.onload = function(){
+		
+		let obj = JSON.parse(xhr.responseText);
+
+		if( obj.RESULTADO =='OK'){
+			console.log("Recetas obtenidas correctamente");
+			creaReceta(obj, 6);
+		}else{
+			console.log("eror en la peticion AJAX");
 		}
-		if(typeof(ingredientes) != "undefined" && ingredientes !== null && ingredientes != "" ){
-          params.i = ingredientes.replace(/\s+/g, ',');
-        }
+	};
 
-        if(typeof(tmin) != "undefined" && tmin !== null && tmin != "" ){
-          params.di = tmin;
-        }
-
-        if(typeof(tmax) != "undefined" && tmax !== null && tmax != "" ){
-          params.df = tmax;
-        }
-
-        if(typeof(dificultad) != "undefined" && dificultad !== null && dificultad != "" ){
-          params.d = dificultad;
-        }
-
-        if(typeof(comensales) != "undefined" && comensales !== null && comensales != "" ){
-          params.c = comensales;
-        }
-
-        if(typeof(autor) != "undefined" && autor !== null && autor != "" ){
-          params.a = autor;
-        }
-        parametros.pag=0;
-        parametros.lpag=4;
-        if( typeof(pagina)!='undefined' && pagina!=null){
-        	parametros.pag=pagina;
-        	var records = url.searchParams.get('lpag');
-        	if(typeof(records)!='undefined' && records!=null){
-        		parametros.lpag=records;
-        	}
-        }
-        var url_parametriza = build_params(parametros).replace(/\%2C/g,',');
-        busca += url_parametriza;
-
-        xhr.open('GET', busca, true);
-        xhr.onload = function(){
-				let objJSON = JSON.parse(xhr.responseText);
-				creaReceta(objJSON, 6);
-			};
-			xhr.onerror = function(){
-				console.log('ERROR');
-		};
-	}
-}
-
-function build_params(data){
-	let ret = [];
-	for (let pos in data){
-		ret.push(encodeURIComponent(pos)+'='+encodeURIComponent(data[pos]));
-	}
-	return ret.join('&');
 }*/
 
 function comprobarUsuario(valor){
@@ -266,7 +181,7 @@ function comprobarUsuario(valor){
 					ultado.innerHTML="Usuario disponible";
 					ultado.style.color='#05A922';
 				}else{
-					login_disponible = false;
+					login_dispname=cocidoonible = false;
 					ultado.innerHTML='Usuario no disponible';
 					ultado.style.color='#FF0000';
 				}
@@ -316,4 +231,405 @@ function registro(formulario){
 	return false;
 }
 
+function compruebaUsuario() {
+  // Comprobar tipo de busqueda
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var user = url.searchParams.get("a");
+  var submit = url.searchParams.get("submit");
+  var pagina = url.searchParams.get("pag");
+  console.log("user:");
+  console.log(user);
+  if( user != undefined )
+  {
+    // Si hay usuario en la URL se realiza la consulta
+    console.log("Usuario activo: ");
+    console.log(user);
+    var url_u = "rest/receta/?a="+user;
+    fetch( url_u )
+    .then(
+      function(response){
+        if( response.status !== 200 )
+        {
+          console.log("Error fetch usuario en buscar.");
+        }
+        response.json().then( function(data){
+          console.log("data: ");
+          console.log(data);
+          // Si el JSON es OK
+
+          var docu = getElementById('resultadosBusqueda');
+          for (var i = 0; i < data.FILAS.length; i++) {
+            docu.innerHTML +=
+           `<div>
+				<section>
+					
+					<a href="receta.html?id=`+data.FILAS[i].id+ `" title=`+data.FILAS[i].nombre+`>
+						<img src="fotos/`+data.FILAS[i].fichero+`" alt="` + data.FILAS[i].nombre + `">
+					</a>
+					<div>
+					<a href="receta.html?id=`+data.FILAS[i].id+ `" title=`+data.FILAS[i].nombre+`>
+						<h3>`+data.FILAS[i].nombre+`</h3>
+					</a>
+					
+					
+						<footer>
+							<p>
+								<span>
+									<a href="buscar.html?autor=` + data.FILAS[i].autor + `">` + data.FILAS[i].autor + `
+									</a>
+								</span><br>
+								<time datetime="` + data.FILAS[i].fecha + `">` + data.FILAS[i].fecha + `</time><br>
+								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>` + data.FILAS[i].positivos + `</button>
+								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>` + data.FILAS[i].negativos + `</button>
+								<button><span class="icon-chat"></span>` + data.FILAS[i].comentarios + `</button>
+							</p>
+						</footer>
+					</div>
+				</section>
+			</div>`;
+
+          }
+        });
+      })
+    .catch( function( err ) {
+
+    })
+
+  }
+  else if( (submit != undefined) || (typeof(pagina) != "undefined" && pagina !== null) )
+  {
+    // Si usuario ha rellenado formulario O pagina
+    var titulo = url.searchParams.get("busqueda");
+    console.log("titulo: ");
+    console.log(titulo);
+    var ingredientes = url.searchParams.get("ingredientes");
+    console.log("ingredientes: ");
+    console.log(ingredientes);
+    var tmin = url.searchParams.get("tiempomin");
+    console.log("tmin: ");
+    console.log(tmin);
+    var tmax = url.searchParams.get("tiempomax");
+    console.log("tmax: ");
+    console.log(tmax);
+    var dificultad = url.searchParams.get("dificultad");
+    console.log("difi: ");
+    console.log(dificultad);
+    var comensales = url.searchParams.get("comensales");
+    console.log("comensales: ");
+    console.log(comensales);
+    var autor = url.searchParams.get("autor");
+    console.log("autor: ");
+    console.log(autor);
+    if( ( submit=="Buscar" && titulo=="" && ingredientes=="" && tmin=="" && tmax=="" && dificultad=="" && comensales=="" && autor=="" ) )
+    {
+      // Usuario no ha introducido ningun valor en la busqueda
+      pedirEntradas();
+    }
+    else {
+      // Si introduce cualquier otra cosa -> realizar busqueda
+      var link = "rest/receta/?";
+      // Si ha realizado una busqueda
+
+        var params = [];
+
+        if(typeof(titulo) != "undefined" && titulo !== null && titulo != "" ){
+          params.t = titulo.replace(/\s+/g, ',');
+        }
+
+        if(typeof(ingredientes) != "undefined" && ingredientes !== null && ingredientes != "" ){
+          params.i = ingredientes.replace(/\s+/g, ',');
+        }
+
+        if(typeof(tmin) != "undefined" && tmin !== null && tmin != "" ){
+          params.di = tmin;
+        }
+
+        if(typeof(tmax) != "undefined" && tmax !== null && tmax != "" ){
+          params.df = tmax;
+        }
+
+        if(typeof(dificultad) != "undefined" && dificultad !== null && dificultad != "" ){
+          params.d = dificultad;
+        }
+
+        if(typeof(comensales) != "undefined" && comensales !== null && comensales != "" ){
+          params.c = comensales;
+        }
+
+        if(typeof(autor) != "undefined" && autor !== null && autor != "" ){
+          params.a = autor;
+        }
+
+        params.pag = 0;
+        params.lpag = 4;
+        if(typeof(pagina) != "undefined" && pagina !== null){
+          params.pag = pagina;
+          var records = url.searchParams.get("lpag");
+          if(typeof(records) != "undefined" && records !== null){
+            params.lpag = records;
+          }
+        }
+
+        var url_params = build_params(params).replace(/\%2C/g,',');
+        link += url_params;
+        console.log("params:");
+        console.log(url_params);
+        console.log("link:");
+        console.log(link);
+
+        fetch(link)
+        .then( function(response){
+          if(response.status !== 200){
+            console.log("Error status");
+          }
+          response.json().then(function( search ) {
+            console.log("search: ");
+            console.log(search);
+
+            var cont = document.getElementById('resultadosBusqueda');
+
+            if(search.FILAS.length > 0){
+
+              // Muestra infor
+
+              var i;
+              for(i=0;i<4;i++)
+              {
+                cont.innerHTML +=
+
+                `<div>
+				<section>
+					
+					<a href="receta.html?id=`+search.FILAS[i].id+ `" title=`+search.FILAS[i].nombre+`>
+						<img src="fotos/`+search.FILAS[i].fichero+`" alt="` + search.FILAS[i].nombre + `">
+					</a>
+					<div>
+					<a href="receta.html?id=`+search.FILAS[i].id+ `" title=`+search.FILAS[i].nombre+`>
+						<h3>`+search.FILAS[i].nombre+`</h3>
+					</a>
+					
+					
+						<footer>
+							<p>
+								<span>
+									<a href="buscar.html?autor=` + search.FILAS[i].autor + `">` + search.FILAS[i].autor + `
+									</a>
+								</span><br>
+								<time datetime="` + search.FILAS[i].fecha + `">` + search.FILAS[i].fecha + `</time><br>
+								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>` + search.FILAS[i].positivos + `</button>
+								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>` + search.FILAS[i].negativos + `</button>
+								<button><span class="icon-chat"></span>` + search.FILAS[i].comentarios + `</button>
+							</p>
+						</footer>
+					</div>
+				</section>
+			</div>`;
+
+              }
+              // paginacion
+              console.log("tot:");
+              console.log(search.TOTAL_COINCIDENCIAS);
+              paginacion(search.TOTAL_COINCIDENCIAS,4);
+            }
+            else{
+              // No resultados
+              cont.innerHTML +=
+              `
+              <article class="card">
+              <p>No se han encontrado resultados.</p>
+              </article>
+              `;
+            }
+          })
+        })
+        .catch( function(err){
+          console.log("Error catch", err);
+        });
+
+    }
+
+
+  }
+  else
+  {
+    // Si ha entrado en buscar.html sin parametros ni nada
+    pedirEntradas();
+    console.log("pagina: ");
+    console.log(pagina);
+  }
+}
+
+function build_params(data) {
+  let ret = [];
+  for (let pos in data){
+    ret.push(encodeURIComponent(pos) + "=" + encodeURIComponent(data[pos]));
+  }
+  return ret.join('&');
+}
+
+function pedirEntradas(){
+
+	console.log('HE ENTRADO A PEDIR ENTRADAS')
+	let xhr = new XMLHttpRequest(),
+		url = 'rest/receta/?u=6';
+	var totalRecetas = 0;
+		
+	xhr.open('GET',url, true);
+	xhr.onload = function(){
+		var recetas = JSON.parse(xhr.responseText);			
+		console.log(recetas);
+
+			ponerRecetas(recetas);
+
+			totalRecetas = document.getElementById('ult_pagina');
+			paginaActual = document.getElementById('paginaActual');
+			
+
+			totalRecetas.innerHTML = Math.ceil((recetas.FILAS.length)/6); // redondeamos hacia arriba
+			botonesIndex(recetas.FILAS.length);
+			console.log('ENTROOOOOO');
+		
+
+		};
+
+		xhr.send();
+
+
+	}
+
+
+
+function ponerRecetas(recetas){
+
+	var recetas_a_mostrar = 6;
+	let todas = document.getElementById('cuerpo_receta');
+
+
+	for(let x =0 ; x<recetas_a_mostrar;x++){
+
+
+		//JSON
+
+		var titulo = recetas.FILAS[recetasCreadas].nombre,
+			autor  = recetas.FILAS[recetasCreadas].autor,
+			comentarios  = recetas.FILAS[recetasCreadas].comentarios,
+			pos  = recetas.FILAS[recetasCreadas].positivos,
+			neg  = recetas.FILAS[recetasCreadas].negativos,
+			foto   = recetas.FILAS[recetasCreadas].fichero,
+			desripcion  = recetas.FILAS[recetasCreadas].descripcion_foto,
+			fecha  = recetas.FILAS[recetasCreadas].fecha,
+			id  = recetas.FILAS[recetasCreadas].id;
+
+		//Codigo HTML
+
+		var articulo =
+
+			`<div>
+				<section>
+					
+					<a href="receta.html?${id}" title=${titulo}>
+						<img src="fotos/${foto}" alt="${desripcion}">
+					</a>
+					<div>
+					<a href="receta.html?${id}" title=${titulo}>
+						<h3>${titulo}</h3>
+					</a>
+					
+					
+						<footer>
+							<p>
+								<span><a href="buscar.html?autor=${autor}">${autor}</a></span><br>
+								<time datetime="${fecha}">${fecha}</time><br>
+								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>${pos}</button>
+								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>${neg}</button>
+								<button><span class="icon-chat"></span>${comentarios}</button>
+							</p>
+						</footer>
+					</div>
+				</section>
+			</div>`;
+
+
+			if(articulo!=null){
+			todas.innerHTML+= articulo;
+			recetasCreadas++;
+			console.log('Recetas Creadas: ' + recetasCreadas);
+			}
+
+	}
+}
+
+
+function botonesIndex(total){
+
+	var paginaActual = document.getElementById('pagina_actual');
+
+	if(recetasCreadas<=6){
+
+		paginaActual.innerHTML = numPagActual;
+
+	}else{
+
+
+	}
+
+}
+/***********************************************************************************************AÑADIR RECETAS*********************************************************************************************************/
+var ing_num = 0;
+
+/*function nuevaReceta(formulario){
+	let frm = new FormData(formulario),
+		xhr = new XMLHttpRequest(),
+
+
+}*/
+function nuevoIngrediente(){
+	let ingredientes =document.getElementById('ingrediente');
+
+	if(ingredientes != ""){
+		var list = ingredientes;
+		ingredientes.innerHTML+='<li>'+ingredientes2.value+'</li>';
+	}
+	ingredientes2.value='';
+	ing_num++;
+}
+
+/*function enviarIngredientes(id){
+  let xhr = new XMLHttpRequest(),
+  fd  = new FormData(),
+  url = 'rest/receta/' + id + '/ingredientes',
+  usu;
+
+  if(xhr){
+    var ul = document.getElementById("ingrediente");
+    var vIngredientes = [];
+    var i;
+
+    for(i=0; i<ul.children.length; i++){
+      vIngredientes.push(ul.childNodes[i].innerText);
+    }
+
+    usu = JSON.parse(sessionStorage.getItem('user'));
+
+    fd.append('l',usu.login);
+    fd.append('i',JSON.stringify(vIngredientes));
+    console.log(fd);
+
+    xhr.open('POST', url, true);
+    xhr.onload = function(){
+       console.log(xhr.responseText);
+
+       let r = JSON.parse(xhr.responseText);
+
+       if(r.RESULTADO == "OK"){
+         console.log("ingredientes enviados a la BD");
+       } else {
+         console.log("nope");
+       }
+    }
+    xhr.setRequestHeader('Authorization', usu.clave);
+    xhr.send(fd);
+  }
+}*/
 
