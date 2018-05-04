@@ -258,36 +258,19 @@ function compruebaUsuario() {
           console.log(data);
           // Si el JSON es OK
 
-          var docu = getElementById('resultadosBusqueda');
+          var docu = getElementById('cuerpo_receta');
           for (var i = 0; i < data.FILAS.length; i++) {
             docu.innerHTML +=
-           `<div>
-				<section>
-					
-					<a href="receta.html?id=`+data.FILAS[i].id+ `" title=`+data.FILAS[i].nombre+`>
-						<img src="fotos/`+data.FILAS[i].fichero+`" alt="` + data.FILAS[i].nombre + `">
-					</a>
-					<div>
-					<a href="receta.html?id=`+data.FILAS[i].id+ `" title=`+data.FILAS[i].nombre+`>
-						<h3>`+data.FILAS[i].nombre+`</h3>
-					</a>
-					
-					
-						<footer>
-							<p>
-								<span>
-									<a href="buscar.html?autor=` + data.FILAS[i].autor + `">` + data.FILAS[i].autor + `
-									</a>
-								</span><br>
-								<time datetime="` + data.FILAS[i].fecha + `">` + data.FILAS[i].fecha + `</time><br>
-								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>` + data.FILAS[i].positivos + `</button>
-								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>` + data.FILAS[i].negativos + `</button>
-								<button><span class="icon-chat"></span>` + data.FILAS[i].comentarios + `</button>
-							</p>
-						</footer>
-					</div>
-				</section>
-			</div>`;
+           `<article>
+				<header>
+					<a href="receta.html?${id}"><h2>${titulo}</h2></a>
+				</header>
+					<a href="receta.html?${id}"><img src=fotos/${foto} alt="No se ha podido cargar la imagen"></a><p>${descripcion}</p>
+				<footer>
+					<span class="icon-thumbs-up">${posi}</span><span class="icon-thumbs-down">${nega}</span><span class="icon-comment">${comentario}</span><br>
+					Subido el d&iacute;a <i><time datetime="${fecha}">${fecha}</time></i> por <a href="buscar.html?autor=${autor}"><b>${autor}</b></a>.
+				</footer>
+			</article>`;
 
           }
         });
@@ -387,7 +370,7 @@ function compruebaUsuario() {
             console.log("search: ");
             console.log(search);
 
-            var cont = document.getElementById('resultadosBusqueda');
+            var cont = document.getElementById('cuerpo_receta');
 
             if(search.FILAS.length > 0){
 
@@ -398,33 +381,16 @@ function compruebaUsuario() {
               {
                 cont.innerHTML +=
 
-                `<div>
-				<section>
-					
-					<a href="receta.html?id=`+search.FILAS[i].id+ `" title=`+search.FILAS[i].nombre+`>
-						<img src="fotos/`+search.FILAS[i].fichero+`" alt="` + search.FILAS[i].nombre + `">
-					</a>
-					<div>
-					<a href="receta.html?id=`+search.FILAS[i].id+ `" title=`+search.FILAS[i].nombre+`>
-						<h3>`+search.FILAS[i].nombre+`</h3>
-					</a>
-					
-					
-						<footer>
-							<p>
-								<span>
-									<a href="buscar.html?autor=` + search.FILAS[i].autor + `">` + search.FILAS[i].autor + `
-									</a>
-								</span><br>
-								<time datetime="` + search.FILAS[i].fecha + `">` + search.FILAS[i].fecha + `</time><br>
-								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>` + search.FILAS[i].positivos + `</button>
-								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>` + search.FILAS[i].negativos + `</button>
-								<button><span class="icon-chat"></span>` + search.FILAS[i].comentarios + `</button>
-							</p>
-						</footer>
-					</div>
-				</section>
-			</div>`;
+                `<article>
+				<header>
+					<a href="receta.html?${id}"><h2>${titulo}</h2></a>
+				</header>
+					<a href="receta.html?${id}"><img src=fotos/${foto} alt="No se ha podido cargar la imagen"></a><p>${descripcion}</p>
+				<footer>
+					<span class="icon-thumbs-up">${posi}</span><span class="icon-thumbs-down">${nega}</span><span class="icon-comment">${comentario}</span><br>
+					Subido el d&iacute;a <i><time datetime="${fecha}">${fecha}</time></i> por <a href="buscar.html?autor=${autor}"><b>${autor}</b></a>.
+				</footer>
+			</article>`;
 
               }
               // paginacion
@@ -517,7 +483,7 @@ function ponerRecetas(recetas){
 			pos  = recetas.FILAS[recetasCreadas].positivos,
 			neg  = recetas.FILAS[recetasCreadas].negativos,
 			foto   = recetas.FILAS[recetasCreadas].fichero,
-			desripcion  = recetas.FILAS[recetasCreadas].descripcion_foto,
+			descripcion  = recetas.FILAS[recetasCreadas].descripcion_foto,
 			fecha  = recetas.FILAS[recetasCreadas].fecha,
 			id  = recetas.FILAS[recetasCreadas].id;
 
@@ -525,30 +491,16 @@ function ponerRecetas(recetas){
 
 		var articulo =
 
-			`<div>
-				<section>
-					
-					<a href="receta.html?${id}" title=${titulo}>
-						<img src="fotos/${foto}" alt="${desripcion}">
-					</a>
-					<div>
-					<a href="receta.html?${id}" title=${titulo}>
-						<h3>${titulo}</h3>
-					</a>
-					
-					
-						<footer>
-							<p>
-								<span><a href="buscar.html?autor=${autor}">${autor}</a></span><br>
-								<time datetime="${fecha}">${fecha}</time><br>
-								<button onclick="like();"><span class="icon-thumbs-up-alt"></span>${pos}</button>
-								<button onclick="dislike();"><span class="icon-thumbs-down-alt"></span>${neg}</button>
-								<button><span class="icon-chat"></span>${comentarios}</button>
-							</p>
-						</footer>
-					</div>
-				</section>
-			</div>`;
+			`<article>
+				<header>
+					<a href="receta.html?${id}"><h2>${titulo}</h2></a>
+				</header>
+					<a href="receta.html?${id}"><img src=fotos/${foto} alt="No se ha podido cargar la imagen"></a><p>${descripcion}</p>
+				<footer>
+					<span class="icon-thumbs-up">${pos}</span><span class="icon-thumbs-down">${neg}</span><span class="icon-comment">${comentarios}</span><br>
+					Subido el d&iacute;a <i><time datetime="${fecha}">${fecha}</time></i> por <a href="buscar.html?autor=${autor}"><b>${autor}</b></a>.
+				</footer>
+			</article>`;
 
 
 			if(articulo!=null){
@@ -632,4 +584,99 @@ function nuevoIngrediente(){
     xhr.send(fd);
   }
 }*/
+
+
+
+
+function muestraReceta(){
+	let url = window.location.href,
+		xhr = new XMLHttpRequest(),
+		parsed = url.split("?"),
+		busca = "rest/receta/";
+
+	busca += parsed[1];
+	console.log(busca);
+	if(parsed[1]!=undefined){
+		xhr.open('GET', busca, true);
+		xhr.onload =function(){
+				obj = JSON.parse(xhr.responseText);
+
+				if(obj.RESULTADO == 'OK'){
+					console.log('peticion AJAX correcta')
+					var receta = document.getElementById('receta'),
+						receta2 = document.getElementById('receta2'),
+						difi = "Dif&iacute;cil";
+					ingredientes = ponerIngredientes(parsed[1]);
+					
+					if(obj.FILAS[0].dificultad == 0){
+						difi = "F&aacute;cil";
+					}
+					if(obj.FILAS[0].dificultad == 1){
+						difi ="Media";
+					}
+					receta.innerHTML= 
+					`
+						<header id="titulo_receta"><a href="receta.html?${parsed[1]}"><h2 title="${obj.FILAS[0].nombre}">${obj.FILAS[0].nombre}</h2></a></header>
+						<a href="receta.html"><img id="imagen_receta" src="fotos/${obj.FILAS[0].fichero}" alt="No se ha podido cargar la imagen"></a><br>
+					`
+					ponerIngredientes(parsed[1]);
+					receta2.innerHTML= 
+					`
+						<b>Fecha de alta:</b> <time datetime="${obj.FILAS[0].fecha}">${obj.FILAS[0].fecha}</time><br><br>
+						<p id="parrafo">
+						<b>Elaboración:</b>${obj.FILAS[0].elaboracion}<br><br>
+					</p>
+
+						<b>Tiempo de elaboración:</b>${obj.FILAS[0].tiempo}<br><br>
+						<b>Dificultad:</b>${difi}<br><br>
+						<b>Número de comensales:</b>${obj.FILAS[0].comensales}<br><br>
+						<b>Número de votos positivos:</b> ${obj.FILAS[0].positivos}<span class="icon-thumbs-up"></span><br><br>
+						<b>Número de votos negativos:</b> ${obj.FILAS[0].negativos}<span class="icon-thumbs-down"></span><br><br>
+						<b>Número de comentarios:</b> <a href="#comentario"> ${obj.FILAS[0].comentarios}<span class="icon-comment"></span></a><br><br>
+						<b>Autor:</b> <a href="buscar.html"><b>${obj.FILAS[0].autor}</b></a><br><br>	
+						<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta"> <input type="button" value="No me gusta"> 
+					<form name="nuevocomentario" method="post" id="nuevocomentario">
+					<h2 id="titulo_nuevocomentario">Añadir un comentario</h2>
+						<label for="titulo">Título del comentario:</label><input type="text" maxlength="50" id="titulo" required><br>
+						<label for="texto">Introduce tu comentario:</label>
+					<textarea form ="nuevocomentario" name="taname" id="texto" cols="35" rows="4" required></textarea>
+					
+						<input type="submit" value="enviar">
+						<input type="reset" value="limpiar">
+					</form>
+					<h2 id="zona-resultados">Comentarios:</h2><br>
+					1 Comentario.<br>
+					<p id="comentario">
+					<b>#1</b> Pep Guardiola <b>Fecha:</b><time datetime="2017-02-14"> Martes, 14/02/2018, 10:37</time><br><br><b>Gran receta de churros</b><br>
+					Lo mejor para ahorrar es comer en el comedor del Congreso. Los platos son bastante buenos y cuestan menos que en la guardería o en la escuela (por favor, no intenteis llevarme la contraria en esto). Está claro que está pensado para gente que gana poco dinero, es decir, no el suficiente. El que quiera entender que entienda.<br><br>
+					</p>
+					</div>
+					`;
+				}
+			}
+			xhr.send();
+		}else{
+			window.location.href="index.html";
+		}
+}
+
+function ponerIngredientes(id){
+	let xhr =new XMLHttpRequest(),
+		url = "./rest/receta/"+id+"/ingredientes";
+
+		xhr.open('GET', url, true);
+
+		xhr.onload = function(){
+			var ingredientes = JSON.parse(xhr.responseText),
+				num_ingres = ingredientes.FILAS.length,
+				insert = document.getElementById("ingredientess");
+
+			for(let i = 0; num_ingres>i;i++){
+					insert.innerHTML += `<li>${ingredientes.FILAS[i].nombre}</li>`;
+					
+			}
+		}
+		xhr.send();
+
+}
 
