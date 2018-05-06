@@ -2,6 +2,7 @@
 var total_recetas = 0,
 	numPagActual= 1,
 	login_disponible = true,
+	comprobante=false;
 	recetasCreadas = 0;
 	
 
@@ -638,7 +639,7 @@ function muestraReceta(){
 						<b>Autor:</b> <a href="buscar.html"><b>${obj.FILAS[0].autor}</b></a><br><br>	
 						<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta" onclick=gusta()> <input type="button" value="No me gusta" onclick=noGusta()> 
 					
-					<h2 id="zona-resultados">Comentarios:</h2><br>
+					
 
 					<br>
 
@@ -754,8 +755,19 @@ function gusta(){
         frm = new FormData();
         receta = window.location.href,
         parsed = receta.split("?"),
-        url = './rest/receta/'+parsed[1]+'/voto/1',
-        user = JSON.parse(sessionStorage.getItem('user'));
+        url = './rest/receta/'+parsed[1]+'/voto/1';
+
+        if(!sessionStorage.getItem('user')){
+        	if(!comprobante){
+
+         	document.getElementById('receta2').innerHTML+='Debes estar registrado para votar recetas.<br>';
+         	comprobante=true;
+         	}
+         	return false;
+    	}
+
+        let user = JSON.parse(sessionStorage.getItem('user'));
+
 
         frm.append('l', user.login);
 
@@ -778,8 +790,19 @@ function noGusta(){
         frm = new FormData();
         receta = window.location.href,
         parsed = receta.split("?"),
-        url = './rest/receta/'+parsed[1]+'/voto/0',
-        user = JSON.parse(sessionStorage.getItem('user'));
+        url = './rest/receta/'+parsed[1]+'/voto/0';
+
+
+		if(!sessionStorage.getItem('user')){
+			if(!comprobante){
+
+         		document.getElementById('receta2').innerHTML+='Debes estar registrado para votar recetas.<br>';
+         		comprobante=true;
+         	}
+			 return false;
+		}
+
+		    let user = JSON.parse(sessionStorage.getItem('user'));
 
         frm.append('l', user.login);
 
