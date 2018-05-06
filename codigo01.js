@@ -636,7 +636,7 @@ function muestraReceta(){
 						<b>Número de votos negativos:</b> ${obj.FILAS[0].negativos}<span class="icon-thumbs-down"></span><br><br>
 						<b>Número de comentarios:</b> <a href="#comentario"> ${obj.FILAS[0].comentarios}<span class="icon-comment"></span></a><br><br>
 						<b>Autor:</b> <a href="buscar.html"><b>${obj.FILAS[0].autor}</b></a><br><br>	
-						<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta"> <input type="button" value="No me gusta"> 
+						<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta" onclick=gusta()> <input type="button" value="No me gusta" onclick=noGusta()> 
 					
 					<h2 id="zona-resultados">Comentarios:</h2><br>
 
@@ -748,4 +748,51 @@ function muestraComentario(){
 			}
 		}
 		xhr.send();
+}
+function gusta(){
+    let xhr = new XMLHttpRequest(),
+        frm = new FormData();
+        receta = window.location.href,
+        parsed = receta.split("?"),
+        url = './rest/receta/'+parsed[1]+'/voto/1',
+        user = JSON.parse(sessionStorage.getItem('user'));
+
+        frm.append('l', user.login);
+
+        xhr.open('POST', url, true);
+
+        xhr.onload = function(){
+            let obj = JSON.parse(xhr.responseText);
+
+            if(obj.RESULTADO=='OK'){
+                console.log("Voto registrado correctamente");
+            }
+        }
+        xhr.setRequestHeader('Authorization', user.clave)
+        xhr.send(frm);
+        location.reload(true);
+}
+
+function noGusta(){
+    let xhr = new XMLHttpRequest(),
+        frm = new FormData();
+        receta = window.location.href,
+        parsed = receta.split("?"),
+        url = './rest/receta/'+parsed[1]+'/voto/0',
+        user = JSON.parse(sessionStorage.getItem('user'));
+
+        frm.append('l', user.login);
+
+        xhr.open('POST', url, true);
+
+        xhr.onload = function(){
+            let obj = JSON.parse(xhr.responseText);
+
+            if(obj.RESULTADO=='OK'){
+                console.log("Voto registrado correctamente");
+            }
+        }
+        xhr.setRequestHeader('Authorization', user.clave)
+        xhr.send(frm);
+        location.reload(true);
 }
