@@ -620,6 +620,8 @@ function muestraReceta(){
 						<a href="receta.html"><img id="imagen_receta" src="fotos/${obj.FILAS[0].fichero}" alt="No se ha podido cargar la imagen"></a><br>
 					`
 					ponerIngredientes(parsed[1]);
+					nuevoComentario();
+					muestraComentario();
 					receta2.innerHTML= 
 					`
 						<b>Fecha de alta:</b> <time datetime="${obj.FILAS[0].fecha}">${obj.FILAS[0].fecha}</time><br><br>
@@ -635,21 +637,11 @@ function muestraReceta(){
 						<b>Número de comentarios:</b> <a href="#comentario"> ${obj.FILAS[0].comentarios}<span class="icon-comment"></span></a><br><br>
 						<b>Autor:</b> <a href="buscar.html"><b>${obj.FILAS[0].autor}</b></a><br><br>	
 						<b>¿Te ha gustado esta receta?</b><input type="button" value="Me gusta"> <input type="button" value="No me gusta"> 
-					<form name="nuevocomentario" method="post" id="nuevocomentario">
-					<h2 id="titulo_nuevocomentario">Añadir un comentario</h2>
-						<label for="titulo">Título del comentario:</label><input type="text" maxlength="50" id="titulo" required><br>
-						<label for="texto">Introduce tu comentario:</label>
-					<textarea form ="nuevocomentario" name="taname" id="texto" cols="35" rows="4" required></textarea>
 					
-						<input type="submit" value="enviar">
-						<input type="reset" value="limpiar">
-					</form>
 					<h2 id="zona-resultados">Comentarios:</h2><br>
-					1 Comentario.<br>
-					<p id="comentario">
-					<b>#1</b> Pep Guardiola <b>Fecha:</b><time datetime="2017-02-14"> Martes, 14/02/2018, 10:37</time><br><br><b>Gran receta de churros</b><br>
-					Lo mejor para ahorrar es comer en el comedor del Congreso. Los platos son bastante buenos y cuestan menos que en la guardería o en la escuela (por favor, no intenteis llevarme la contraria en esto). Está claro que está pensado para gente que gana poco dinero, es decir, no el suficiente. El que quiera entender que entienda.<br><br>
-					</p>
+
+					<br>
+
 					</div>
 					`;
 				}
@@ -680,3 +672,80 @@ function ponerIngredientes(id){
 
 }
 
+/***********************************************************************************************RECETAS*********************************************************************************************************/
+function nuevoComentario(){
+	var logged = sessionStorage.getItem("user"),
+		xhr = new XMLHttpRequest();
+	if(logged){
+		xhr.open('GET', './comentario.html', true);
+		xhr.onload=function(){
+
+
+		document.getElementById('commentCage').innerHTML=xhr.responseText;
+		}
+		xhr.send();
+	}
+	else{
+		document.getElementById('commentCage').innerHTML=`Debes estar <a href="login.html">logeado</a> para escribir un comentario`;
+	}
+}
+function dejaComentario(frm){
+	let formulario = new FormData(),
+		parsed = window.location.href.split("?"),
+		xhr = new XMLHttpRequest(),
+		usu = JSON.parse(sessionStorage.getItem('user')),
+		url = './rest/receta/'+parsed[1]+'/comentario';
+
+		formulario.append('l',usu.login);
+		formulario.append('titulo', frm.titulo.value);
+		formulario.append('texto', frm.texto.value);
+
+		if(!sessionStorage.getItem('user')) return false;
+		console.log(usu);
+		console.log(formulario.l);
+
+
+		xhr.open('POST',url,true);
+
+		xhr.onload=function(){
+
+			var obj=JSON.parse(xhr.responseText);
+			if(obj.RESULTADO=='OK'){
+				console.log('comentario registrado');
+			}
+			else{
+				console.log(xhr.responseText);
+			}
+
+		}
+		xhr.onerror=function(){
+			console.log(xhr.responseText);
+		}
+		xhr.setRequestHeader('Authorization', usu.clave );
+
+		xhr.send(formulario);
+
+
+}
+function muestraComentario(){
+	let xhr = new XMLHttpRequest(),
+		parsed = window.location.href.split("?"),
+		url = './rest/receta/'+parsed[1]+'/comentarios';
+
+		xhr.open('GET', url, true);
+
+		xhr.onload = function(){
+			var obj=JSON.parse(xhr.responseText), 
+				comentario = document.getElementById('comentarios');
+
+
+
+			for(let i=0;i<obj.FILAS.length;i++){
+				comentario.innerHTML+=`					<p id="comentario">
+					<b>#1</b> ${obj.FILAS[i].autor} <b>Fecha:</b><time datetime="${obj.FILAS[i].fecha}">${obj.FILAS[i].fecha}</time><br><br><b>${obj.FILAS[i].titulo}</b><br>
+					${obj.FILAS[i].texto}<br><br>
+					</p>`
+			}
+		}
+		xhr.send();
+}

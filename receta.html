@@ -9,27 +9,31 @@
 
 	<a id="Inicio"></a>
 	
-	<body onload="muestraReceta()">
+	<body onload="muestraReceta(); logged()">
 		<header>
 		<h1 id="Titulo">
 			El Recetorio de Mike
 		</h1>
 	</header>
+
 	<nav>
 			<input type="checkbox" id="ckbmenu">
 			<ul>
 				<li><label for="ckbmenu">&equiv;</label></li>
 				<li><a href="index.html"><span class="icon-home"><span>Inicio</span></span> </a> </li>
 				<li><a href="buscar.html"><span class="icon-search"><span>Buscar</span></span></a></li>
-				<li><a href="login.html"><span class="icon-login"><span>Login</span></span> </a> </li>
-				<li><a href="registro.html"><span class="icon-address-book"><span>Registro</span></span> </a></li>
-				<li><a href=""><span class="icon-logout"><span>Logout</span></span></a> </li>
-				<li><a href="nueva-receta.html"><span class="icon-pencil-neg"><span>Nueva Receta</span></span></a></li>
+				<li id="log"><a href="login.html"><span class="icon-login"><span>Login</span></span> </a></li>
+				<li id="reg"><a href="registro.html"><span class="icon-address-book"><span>Registro</span></span> </a></li>
+				<li id="out"><a href=""><span class="icon-logout" onclick="cerrarSesion()"><span>Logout</span></span></a> </li>
+				<li id="new"><a href="nueva-receta.html"><span class="icon-pencil-neg"><span>Nueva Receta</span></span></a></li>
+				<li><form onsubmit="busquedaRapida()" action="buscar.html"><input type="search" name="name" id="buscaReceta"><button type="submit" >Buscar</button></form></li>
 		</ul>
 	</nav>
 	<div id="receta"></div>
 	<div id="ingredientess"><b>Ingredientes</b><br><br></div>
 	<div id="receta2"></div>
+	<div id="commentCage"></div>
+	<div id="comentarios"></div>
 	
 <footer>
 	<div id="texto_footer">
