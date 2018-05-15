@@ -1,5 +1,6 @@
 var _ANCHO_ = 480,
-	_ALTO_ = 480;
+	_ALTO_ = 480,
+	ncols = 3;
 
 function prepararCanvas(){
 	let cvs = document.querySelectorAll('canvas');
@@ -30,7 +31,62 @@ function prepararCanvas(){
 			img.src = fr.result;
 		}
 		fr.readAsDataURL(fichero);
+	}
+	//EVENTOS DE RATON
+	cv02.onmousemove = function(e){
+		let x = e.offsetX,
+			y = e.offsetY,
+			dim = cv02.width / ncols,
+			fila, col;
+			col = Math.floor(x / dim);
+			fila = Math.floor(y / dim);
+			document.querySelector('#posXY').innerHTML = `(${x}, ${y})`;
+			//pintar trozo imagen
 
+			let ctx02 = cv02.getContext('2d');
+			ctx02.drawImage(cv01,col*dim,fila*dim,dim,dim,col*dim, fila*dim,dim,dim);
+	}
+	cv02.onmouseenter = function(e){
+		let x = e.offsetX,
+			y = e.offsetY;
+
+			document.querySelector('#posEXY').innerHTML = `(${x}, ${y})`;
+	}
+	cv02.onmouseleave = function(e){
+		let x = e.offsetX,
+			y = e.offsetY;
+
+			document.querySelector('#posSXY').innerHTML = `(${x}, ${y})`;
+	}
+	cv02.onclick = function(e){
+		let x = e.offsetX,
+			y = e.offsetY,
+			dim = cv02.width / ncols,
+			fila, col;
+
+			document.querySelector('#posCXY').innerHTML = `(${x}, ${y})`;
+			//Sacar fila y columna
+			col = Math.floor(x / dim);
+			fila = Math.floor(y / dim);
+			document.querySelector('#posFCXY').innerHTML = `(${col}, ${fila})`;
+
+			let ctx = cv01.getContext('2d'),
+				ctx2 = cv02.getContext('2d'),
+				imgData = ctx.getImageData(col*dim,fila*dim,dim,dim);
+
+			ctx2.putImageData(imgData,col*dim,fila*dim);
+	}
+	cv02.onmousedown = function(e){
+		let x = e.offsetX,
+			y = e.offsetY;
+
+			document.querySelector('#posDXY').innerHTML = `(${x}, ${y})`;
+	}
+	cv02.onmouseup = function(e){
+		let x = e.offsetX,
+			y = e.offsetY;
+
+			document.querySelector('#posUXY').innerHTML = `(${x}, ${y})`;
 	}
 }
 
@@ -65,9 +121,11 @@ function rotar(){
 		ctx.rotate(Math.PI * (ang / 180));
 }
 
-function limpiar(id){
-	let cv = document.querySelector('#cv0'+id);
-
+function limpiar(e/*, id*/){
+	//let cv = document.querySelector('#cv0'+id);
+	let footer = e.target.parentNode,
+		section = footer.parentNode,
+		cv = section.querySelector('canvas');
 	cv.width = cv.width;
 }
 
@@ -110,7 +168,6 @@ function copiaCanvas(){
 function lineas(){
 	let cv = document.querySelector('#cv02'),
 		ctx = cv.getContext('2d'),
-		ncols = 3,
 		dimension = cv.width/3;
 
 	ctx.beginPath();

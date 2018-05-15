@@ -10,23 +10,37 @@
 <header><h1>Canvas de ejemplo</h1></header>
 <section>
 	<h2>Canvas 01</h2>
+	<div>
 		<canvas id="cv01"></canvas>
 		<footer>
 			<button onclick = "prueba01();">Prueba 1</button>
 			<button onclick = "trasladar();">Trasladar</button>
 			<button onclick="escalar()">Calleja</button>
 			<button onclick="rotar()">Ruteo</button>
-			<button onclick="limpiar(1)">aida lai</button><br>
+			<button onclick="limpiar(event)">aida lai</button><br>
 			<button onclick="imagen()">La verga que boludo</button>
 			<button onclick="imagen2()">Spaiderman</button>
 			<button onclick="copiaCanvas()">Tochadote</button>
 		</footer>
+	</div>
 </section>
 <section>
 	<h2>Canvas 02</h2>
+	<div>
 		<canvas id="cv02"></canvas>
-		<footer><button onclick="lineas()">Glichh</button></footer>
-		<button onclick="limpiar(2)">aida lai</button><br>
+		<footer>
+			<button onclick="lineas();">Glichh</button>
+		<button onclick="limpiar(event);">aida lai</button><br>
+		<div><span>Posicion (X,Y): </span><output id="posXY"></output></div>
+		<div><span>Posicion entrada (X,Y): </span><output id="posEXY"></output></div>
+		<div><span>Posicion salida (X,Y): </span><output id="posSXY"></output></div>
+		<div><span>Click (X,Y): </span><output id="posCXY"></output></div>
+		<div><span>Down (X,Y): </span><output id="posDXY"></output></div>
+		<div><span>Up (X,Y): </span><output id="posUXY"></output></div>
+		<div><span>Fila, columna: </span><output id="posFCXY"></output></div>
+		</footer>
+	</div>
+
 </section>
 <script>
 	prepararCanvas();

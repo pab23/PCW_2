@@ -1,3 +1,10 @@
 canvas{
 	border: 4px dotted #FF0000;
 }
+body>section:nth-of-type(2)>div{
+	display: flex;
+}
+body>section{
+	display: inline-block;
+	float: left;
+}
